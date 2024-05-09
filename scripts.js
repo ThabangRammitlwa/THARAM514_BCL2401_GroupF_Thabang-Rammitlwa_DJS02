@@ -1,8 +1,10 @@
 const form = document.querySelector("[data-form]");
 const result = document.querySelector("[data-result]");
 
+//add an event 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
+  //create a new formData object
   const entries = new FormData(event.target);
   const { dividend, divider } = Object.fromEntries(entries);
 
@@ -17,13 +19,14 @@ form.addEventListener("submit", (event) => {
     console.error("Error: Division by zero");
     return;
   }
+  //Checking if the dividend and divider values are numbers
   if (isNaN(parseInt(dividend)) || isNaN(parseInt(divider))) {
     result.classList.add("critical-error");
     result.innerText = "Something critical went wrong. Please reload the page";
     console.error("Error: Invalid input provided");
     return;
   }
-
+//Perfom the division and display results
   const quotient = Math.floor((dividend) / (divider));
   result.innerText = `${quotient}`;
 });
